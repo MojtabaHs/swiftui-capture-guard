@@ -6,7 +6,7 @@ private struct SizeReader: ViewModifier {
     func body(content: Content) -> some View {
         content.background(
             GeometryReader {
-                Color.clear .preference(key: NewSizePreferenceKey.self, value: $0.size )
+                Color.clear.preference(key: NewSizePreferenceKey.self, value: $0.size)
             }
         )
         .onPreferenceChange(NewSizePreferenceKey.self, perform: onNewSize)
@@ -14,9 +14,7 @@ private struct SizeReader: ViewModifier {
 }
 
 extension View {
-    func onNewSize(
-        perform: @escaping (NewSizePreferenceKey.Value) -> Void
-    ) -> some View {
+    func onNewSize(perform: @escaping (NewSizePreferenceKey.Value) -> Void) -> some View {
         modifier(SizeReader(onNewSize: perform))
     }
 }
